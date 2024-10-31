@@ -1,0 +1,28 @@
+name: Auto Add Reviewers and Comment on PR
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  add_reviewers_and_comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add reviewers to PR
+        uses: peter-evans/create-pull-request@v5
+        with:
+          reviewers: |
+            hari-ultiweb
+            priya-ultiweb
+            bhargav-ultiweb
+
+      - name: Add comment to PR
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: "Dear Reviewers, I have completed the challenge and would like to submit for a review. Thank you"
+            })
