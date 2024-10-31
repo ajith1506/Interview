@@ -36,3 +36,63 @@ If you're finding this online, it probably means you're interested to apply for 
 2. You work on the challenge and submit a PR.
 3. Post review, if we find that interesting, you should receive an email from us for Fist Interview, that's where we will understand few more technical insights. This would be 80% technical interview and 20% non technical.
 4. If you're through that, you should receive another email for the 2nd & final round of interview where you can negotiate salary packages in alignment to the job role, your skill sets and other parmeters.
+
+
+# Coding Challenge Instruction
+Below are the detailed instructions for participating in this challenge. Please read carefully and follow each step to complete your submission successfully.
+
+## 📖 Challenge Overview
+
+1. **Read the User Story (Challenge)**: 
+   - Get the Issue details from your training institute.
+   - Understand what needs to be done.
+
+## 🚀 Participation Steps
+Please follow these steps to complete the challenge:
+
+### Step 1: Fork the Repository
+
+1. **Fork this repository** to your GitHub account by clicking the "Fork" button in the top right corner.
+2. **Clone the forked repository** to your local machine to begin working.
+
+### Step 2: Create a New Branch
+
+1. **Branch Naming**: Use the following format for your branch name:
+- Example: `Ramesh_Elongovan_Pizza` or `Geetha_Selvaraj_Biriyani`
+
+2. **Create the Branch**: 
+Run the following commands in your terminal to create and switch to your new branch:
+`git checkout -b [YourBranchName]`
+
+3. **Implement the Solution**
+Work on the Code: Complete the challenge requirements as specified in the GitHub issue.
+Commit Your Changes: Make sure to commit your code regularly with meaningful commit messages.
+Push the Branch: Once you’re done, push your branch to your forked repository:
+`git push origin [YourBranchName]`, example `git push orign Ramesh_Elongovan_Pizza`
+
+4. **Submit a Pull Request**
+Open a PR: Navigate to your forked repository on GitHub, switch to your branch, and click the "New pull request" button.
+PR Target: Set the target branch to **Review Interview** in this repository.
+PR Title: Use the title format: `Submission: [FullName]'s Challenge Solution`
+Description: Add any notes or explanations about your implementation if needed.
+
+5. **Automated Review Process**
+Once your pull request is open:
+
+- Automated Reviewer Assignment: Our GitHub workflow will automatically add our review team to your PR.
+- Automated Comment: An automated comment will acknowledge receipt of your PR and notify our reviewers.
+
+6. **Code Review & Feedback**
+- Review Process: Our reviewers will evaluate your solution, focusing on code quality, performance, and adherence to the requirements.
+- Feedback: Reviewers may leave comments or suggestions on your code. Please feel free to respond or make changes as requested.
+
+7. **Next Steps**
+- Interview Invitation: If your solution meets our standards, we’ll reach out to schedule an interview call.
+- Follow-up: In case of any clarifications or additional input, feel free to comment on your PR.
+
+# 🔥 Important Guidelines
+- Commit Often: We recommend making small, frequent commits to document your thought process.
+- Read Instructions Carefully: Ensure that all steps are followed precisely to avoid delays.
+- Naming Conventions: Adhere to the branch and PR naming conventions provided to help us track submissions easily.
+
+
