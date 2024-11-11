@@ -2,6 +2,62 @@ import React, { useState } from "react";
 import FormTitle from "./components/FormTitle";
 import Question from "./components/Question";
 
+const Preview = ({ formTitle, questions, setPreviewMode }) => (
+  <div
+    style={{
+      backgroundColor: "lightgrey",
+      padding: "20px",
+      borderRadius: "20px",
+      textAlign: "left",
+    }}
+  >
+    <h2>{formTitle}</h2>
+    {questions.map((question, index) => (
+      <div key={question.questionId} style={{ marginBottom: "10px" }}>
+        <p>
+          <strong>
+            Q{index + 1}: {question.questionText}
+          </strong>
+        </p>
+        {question.type === "MCQ" ? (
+          <div>
+            {question.options.map((option) => (
+              <label key={option.optionId} style={{ display: "block" }}>
+                <input type="radio" name={`question-${question.questionId}`} />
+                {option.optionText}
+              </label>
+            ))}
+          </div>
+        ) : (
+          <textarea
+            placeholder="Type your answer here..."
+            maxLength={2000}
+            style={{
+              width: "40%",
+              marginTop: "10px",
+              padding: "10px 5px",
+              borderRadius: "5px",
+              border: "none",
+            }}
+          ></textarea>
+        )}
+      </div>
+    ))}
+    <button
+      onClick={() => setPreviewMode(false)}
+      style={{
+        backgroundColor: "orange",
+        color: "white",
+        padding: "10px 20px",
+        borderRadius: "20px",
+        border: "none",
+      }}
+    >
+      Back
+    </button>
+  </div>
+);
+
 const App = () => {
   const [formTitle, setFormTitle] = useState("Untitled Form");
   const [questions, setQuestions] = useState([
@@ -16,6 +72,7 @@ const App = () => {
       continueTo: "",
     },
   ]);
+  const [previewMode, setPreviewMode] = useState(false);
 
   const addQuestion = () => {
     setQuestions([
@@ -31,6 +88,12 @@ const App = () => {
         continueTo: "",
       },
     ]);
+  };
+
+  const deleteQuestion = (questionId) => {
+    setQuestions(
+      questions.filter((question) => question.questionId !== questionId)
+    );
   };
 
   const updateQuestion = (index, updatedQuestion) => {
@@ -103,55 +166,92 @@ const App = () => {
         gap: "20px",
       }}
     >
-      <FormTitle title={formTitle} setTitle={setFormTitle} />
-
-      {questions.map((question, index) => (
-        <Question
-          key={question.questionId}
-          question={question}
-          updateQuestion={(updatedQuestion) =>
-            updateQuestion(index, updatedQuestion)
-          }
+      {previewMode ? (
+        <Preview
+          formTitle={formTitle}
+          questions={questions}
+          setPreviewMode={setPreviewMode}
         />
-      ))}
-
-      <button
-        onClick={addQuestion}
-        style={{
-          borderRadius: "20px ",
-          display: "block",
-          margin: "20px 0",
-          padding: "10px 20px",
-          backgroundColor: "lightskyblue",
-        }}
-      >
-        Add Question
-      </button>
-      <button
-        onClick={handleSubmit}
-        style={{
-          backgroundColor: "green",
-          color: "white",
-          padding: "10px 20px",
-          borderRadius: "20px ",
-          border: "none",
-        }}
-      >
-        Save Form
-      </button>
-      <button
-        onClick={handleDeleteForm}
-        style={{
-          borderRadius: "20px ",
-          backgroundColor: "red",
-          color: "white",
-          padding: "10px 20px",
-          marginLeft: "10px",
-          border: "none",
-        }}
-      >
-        Delete Form
-      </button>
+      ) : (
+        <>
+          <FormTitle title={formTitle} setTitle={setFormTitle} />
+          {questions.map((question, index) => (
+            <div key={question.questionId} style={{ position: "relative" }}>
+              <Question
+                question={question}
+                updateQuestion={(updatedQuestion) =>
+                  updateQuestion(index, updatedQuestion)
+                }
+              />
+              <button
+                onClick={() => deleteQuestion(question.questionId)}
+                style={{
+                  position: "absolute",
+                  top: "10px",
+                  right: "10px",
+                  backgroundColor: "red",
+                  color: "white",
+                  padding: "5px 10px",
+                  borderRadius: "10px",
+                  border: "none",
+                }}
+              >
+                Delete
+              </button>
+            </div>
+          ))}
+          <button
+            onClick={addQuestion}
+            style={{
+              borderRadius: "20px ",
+              display: "block",
+              margin: "20px 0",
+              padding: "10px 20px",
+              backgroundColor: "lightskyblue",
+            }}
+          >
+            Add Question
+          </button>
+          <button
+            onClick={handleSubmit}
+            style={{
+              backgroundColor: "green",
+              color: "white",
+              padding: "10px 20px",
+              borderRadius: "20px ",
+              border: "none",
+            }}
+          >
+            Save Form
+          </button>
+          <button
+            onClick={() => setPreviewMode(true)}
+            style={{
+              backgroundColor: "blue",
+              color: "white",
+              padding: "10px 20px",
+              borderRadius: "20px ",
+              border: "none",
+              marginLeft: "10px",
+            }}
+          >
+            Preview
+          </button>
+          <button
+            onClick={handleDeleteForm}
+            style={{
+              borderRadius: "20px ",
+              backgroundColor: "red",
+              color: "white",
+              padding: "10px 20px",
+              marginLeft: "10px",
+              border: "none",
+            }}
+          >
+            Delete Form
+          </button>
+        </>
+      )}
     </div>
   );
 };
